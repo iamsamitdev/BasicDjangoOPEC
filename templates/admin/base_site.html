@@ -1,0 +1,13 @@
+{% extends "admin/base.html" %}
+
+{% block title %}{{ title }} | {{ site_title|default:_('ระบบจัดการสินค้า') }}{% endblock %}
+
+{% block branding %}
+<h1 id="site-name">
+    <a href="{% url 'admin:index' %}">
+        ระบบจัดการสินค้า
+    </a>
+</h1>
+{% endblock %}
+
+{% block nav-global %}{% endblock %}

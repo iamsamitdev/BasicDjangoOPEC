@@ -1,0 +1,321 @@
+{% extends 'stock/base.html' %}
+
+{% block title %} หน้าแรก - ระบบจัดการสต๊อกสินค้า {% endblock %}
+
+{% block content %}
+<!-- Hero Slider Section -->
+<div id="heroCarousel"
+    class="carousel slide mb-5"
+    data-bs-ride="carousel">
+    <div class="carousel-indicators">
+        <button type="button"
+            data-bs-target="#heroCarousel"
+            data-bs-slide-to="0"
+            class="active"></button>
+        <button type="button"
+            data-bs-target="#heroCarousel"
+            data-bs-slide-to="1"></button>
+        <button type="button"
+            data-bs-target="#heroCarousel"
+            data-bs-slide-to="2"></button>
+    </div>
+
+    <div class="carousel-inner">
+        <!-- Slide 1 -->
+        <div class="carousel-item active">
+            <div class="hero-slide"
+                style="background-image: url('https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80');">
+                <div class="hero-overlay">
+                    <div class="container">
+                        <div class="row align-items-center min-vh-75">
+                            <div class="col-lg-6">
+                                <h1 class="display-4 fw-bold text-white mb-4">
+                                    ระบบจัดการสต๊อกสินค้า
+                                </h1>
+                                <p class="lead text-white mb-4">
+                                    จัดการคลังสินค้าของคุณได้อย่างมีประสิทธิภาพ ด้วยระบบที่ทันสมัยและใช้งานง่าย
+                                </p>
+                                <div class="d-flex gap-3">
+                                    <a href="{% url 'product' %}"
+                                        class="btn btn-primary btn-lg">
+                                        <i class="fas fa-shopping-bag me-2"></i>ดูสินค้า
+                                    </a>
+                                    <a href="{% url 'about' %}"
+                                        class="btn btn-outline-light btn-lg">
+                                        <i class="fas fa-info-circle me-2"></i>เรียนรู้เพิ่มเติม
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 2 -->
+        <div class="carousel-item">
+            <div class="hero-slide"
+                style="background-image: url('https://images.unsplash.com/photo-1553062407-98eeb64c6a62?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80');">
+                <div class="hero-overlay">
+                    <div class="container">
+                        <div class="row align-items-center min-vh-75">
+                            <div class="col-lg-6">
+                                <h1 class="display-4 fw-bold text-white mb-4">
+                                    รายงานและการวิเคราะห์
+                                </h1>
+                                <p class="lead text-white mb-4">
+                                    ติดตามข้อมูลการขายและสต๊อกสินค้าแบบเรียลไทม์ เพื่อตัดสินใจทางธุรกิจที่ดีขึ้น
+                                </p>
+                                <a href="#"
+                                    class="btn btn-success btn-lg">
+                                    <i class="fas fa-chart-line me-2"></i>ดูรายงาน
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 3 -->
+        <div class="carousel-item">
+            <div class="hero-slide"
+                style="background-image: url('https://images.unsplash.com/photo-1560472354-b33ff0c44a43?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80');">
+                <div class="hero-overlay">
+                    <div class="container">
+                        <div class="row align-items-center min-vh-75">
+                            <div class="col-lg-6">
+                                <h1 class="display-4 fw-bold text-white mb-4">
+                                    ปลอดภัยและเชื่อถือได้
+                                </h1>
+                                <p class="lead text-white mb-4">
+                                    ข้อมูลของคุณปลอดภัยด้วยระบบรักษาความปลอดภัยระดับองค์กร และการสำรองข้อมูลอัตโนมัติ
+                                </p>
+                                <a href="{% url 'contact' %}"
+                                    class="btn btn-warning btn-lg">
+                                    <i class="fas fa-phone me-2"></i>ติดต่อเรา
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <button class="carousel-control-prev"
+        type="button"
+        data-bs-target="#heroCarousel"
+        data-bs-slide="prev">
+        <span class="carousel-control-prev-icon"></span>
+    </button>
+    <button class="carousel-control-next"
+        type="button"
+        data-bs-target="#heroCarousel"
+        data-bs-slide="next">
+        <span class="carousel-control-next-icon"></span>
+    </button>
+</div>
+
+<!-- Features Section -->
+<section class="py-5">
+    <div class="container">
+        <div class="row text-center mb-5">
+            <div class="col-lg-8 mx-auto">
+                <h2 class="display-5 fw-bold mb-3">ทำไมต้องเลือกเรา?</h2>
+                <p class="lead text-muted">ระบบจัดการสต๊อกที่ครบครันและทันสมัย เพื่อตอบสนองทุกความต้องการของธุรกิจคุณ
+                </p>
+            </div>
+        </div>
+
+        <div class="row g-4">
+            <div class="col-lg-4 col-md-6">
+                <div class="feature-card h-100 p-4 text-center">
+                    <div class="feature-icon mb-3">
+                        <i class="fas fa-box-open fa-3x text-primary"></i>
+                    </div>
+                    <h4 class="mb-3">จัดการสินค้าง่าย</h4>
+                    <p class="text-muted">เพิ่ม แก้ไข และลบสินค้าได้ง่าย พร้อมระบบค้นหาที่รวดเร็ว</p>
+                </div>
+            </div>
+
+            <div class="col-lg-4 col-md-6">
+                <div class="feature-card h-100 p-4 text-center">
+                    <div class="feature-icon mb-3">
+                        <i class="fas fa-chart-bar fa-3x text-success"></i>
+                    </div>
+                    <h4 class="mb-3">รายงานแบบเรียลไทม์</h4>
+                    <p class="text-muted">ติดตามสต๊อกสินค้าและยอดขายแบบเรียลไทม์ พร้อมกราฟที่เข้าใจง่าย</p>
+                </div>
+            </div>
+
+            <div class="col-lg-4 col-md-6">
+                <div class="feature-card h-100 p-4 text-center">
+                    <div class="feature-icon mb-3">
+                        <i class="fas fa-shield-alt fa-3x text-warning"></i>
+                    </div>
+                    <h4 class="mb-3">ระบบปลอดภัย</h4>
+                    <p class="text-muted">รักษาความปลอดภัยข้อมูลด้วยระบบเข้ารหัสและสำรองข้อมูลอัตโนมัติ</p>
+                </div>
+            </div>
+
+            <div class="col-lg-4 col-md-6">
+                <div class="feature-card h-100 p-4 text-center">
+                    <div class="feature-icon mb-3">
+                        <i class="fas fa-mobile-alt fa-3x text-info"></i>
+                    </div>
+                    <h4 class="mb-3">รองรับทุกอุปกรณ์</h4>
+                    <p class="text-muted">ใช้งานได้ทั้งคอมพิวเตอร์ แท็บเล็ต และมือถือ ทุกที่ทุกเวลา</p>
+                </div>
+            </div>
+
+            <div class="col-lg-4 col-md-6">
+                <div class="feature-card h-100 p-4 text-center">
+                    <div class="feature-icon mb-3">
+                        <i class="fas fa-users fa-3x text-purple"></i>
+                    </div>
+                    <h4 class="mb-3">ทีมงานมืออาชีพ</h4>
+                    <p class="text-muted">ทีมสนับสนุนพร้อมให้ความช่วยเหลือและอัพเดทระบบอย่างต่อเนื่อง</p>
+                </div>
+            </div>
+
+            <div class="col-lg-4 col-md-6">
+                <div class="feature-card h-100 p-4 text-center">
+                    <div class="feature-icon mb-3">
+                        <i class="fas fa-cog fa-3x text-secondary"></i>
+                    </div>
+                    <h4 class="mb-3">ปรับแต่งได้</h4>
+                    <p class="text-muted">ระบบยืดหยุ่น สามารถปรับแต่งให้เข้ากับความต้องการของธุรกิจ</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Stats Section -->
+<section class="py-5 bg-primary text-white">
+    <div class="container">
+        <div class="row text-center">
+            <div class="col-lg-3 col-md-6 mb-4">
+                <div class="stat-item">
+                    <h2 class="display-4 fw-bold mb-2">1,000+</h2>
+                    <p class="mb-0">ผู้ใช้งาน</p>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-6 mb-4">
+                <div class="stat-item">
+                    <h2 class="display-4 fw-bold mb-2">50,000+</h2>
+                    <p class="mb-0">สินค้าในระบบ</p>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-6 mb-4">
+                <div class="stat-item">
+                    <h2 class="display-4 fw-bold mb-2">99.9%</h2>
+                    <p class="mb-0">ความพึงพอใจ</p>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-6 mb-4">
+                <div class="stat-item">
+                    <h2 class="display-4 fw-bold mb-2">24/7</h2>
+                    <p class="mb-0">การสนับสนุน</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- CTA Section -->
+<section class="py-5">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 mx-auto text-center">
+                <h2 class="display-5 fw-bold mb-4">พร้อมเริ่มต้นแล้วหรือยัง?</h2>
+                <p class="lead text-muted mb-4">
+                    เริ่มใช้งานระบบจัดการสต๊อกของเราวันนี้ และเพิ่มประสิทธิภาพให้กับธุรกิจของคุณ
+                </p>
+                <div class="d-flex justify-content-center gap-3">
+                    <a href="{% url 'product' %}"
+                        class="btn btn-primary btn-lg px-5">
+                        <i class="fas fa-rocket me-2"></i>เริ่มต้นใช้งาน
+                    </a>
+                    <a href="{% url 'contact' %}"
+                        class="btn btn-outline-primary btn-lg px-5">
+                        <i class="fas fa-comments me-2"></i>ปรึกษาฟรี
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<style>
+    .hero-slide {
+        height: 70vh;
+        background-size: cover;
+        background-position: center;
+        position: relative;
+    }
+
+    .hero-overlay {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(135deg, rgba(0, 0, 0, 0.7) 0%, rgba(0, 0, 0, 0.3) 100%);
+        display: flex;
+        align-items: center;
+    }
+
+    .min-vh-75 {
+        min-height: 70vh;
+    }
+
+    .feature-card {
+        background: white;
+        border-radius: 15px;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        transition: all 0.3s ease;
+        border: 1px solid #f0f0f0;
+    }
+
+    .feature-card:hover {
+        transform: translateY(-10px);
+        box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+    }
+
+    .feature-icon {
+        height: 80px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .text-purple {
+        color: #8b5cf6 !important;
+    }
+
+    .stat-item {
+        padding: 2rem 1rem;
+    }
+
+    .btn-lg {
+        padding: 0.75rem 2rem;
+        font-weight: 600;
+    }
+
+    @media (max-width: 768px) {
+        .hero-slide {
+            height: 60vh;
+        }
+
+        .display-4 {
+            font-size: 2rem;
+        }
+
+        .lead {
+            font-size: 1.1rem;
+        }
+    }
+</style>
+{% endblock %}

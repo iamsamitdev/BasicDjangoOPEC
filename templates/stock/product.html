@@ -1,0 +1,1073 @@
+{% extends 'stock/base.html' %}
+
+{% block title %} Product Management - Inventory System {% endblock %}
+
+{% block content %}
+<div class="product-container">
+    <!-- Hero Section -->
+    <div class="product-hero">
+        <div class="hero-content">
+            <h1 class="hero-title">
+                <i class="fas fa-boxes"></i>
+                Product Management
+            </h1>
+            <p class="hero-subtitle">
+                Manage your inventory with ease - View, Edit, and Track all your products
+            </p>
+        </div>
+    </div>
+
+    <!-- Stats Cards -->
+    <div class="stats-section">
+        <div class="stats-grid">
+            <div class="stat-card">
+                <div class="stat-icon">
+                    <i class="fas fa-cube"></i>
+                </div>
+                <div class="stat-info">
+                    <h3>{{ products|length }}</h3>
+                    <p>Total Products</p>
+                </div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-icon">
+                    <i class="fas fa-chart-line"></i>
+                </div>
+                <div class="stat-info">
+                    <h3>{{ products|length|add:"42" }}</h3>
+                    <p>Total Stock</p>
+                </div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-icon">
+                    <i class="fas fa-dollar-sign"></i>
+                </div>
+                <div class="stat-info">
+                    <h3>฿125,450</h3>
+                    <p>Total Value</p>
+                </div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-icon">
+                    <i class="fas fa-exclamation-triangle"></i>
+                </div>
+                <div class="stat-info">
+                    <h3>3</h3>
+                    <p>Low Stock</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Control Panel -->
+    <div class="control-panel">
+        <div class="control-left">
+            <h2>
+                <i class="fas fa-list"></i>
+                รายการสินค้าทั้งหมด
+            </h2>
+            <p class="control-description">จัดการและติดตามสินค้าในคลังของคุณ</p>
+        </div>
+        <div class="control-right">
+            <button class="btn btn-primary">
+                <i class="fas fa-plus"></i>
+                เพิ่มสินค้าใหม่
+            </button>
+            <button class="btn btn-secondary">
+                <i class="fas fa-download"></i>
+                Export
+            </button>
+            <div class="search-box">
+                <i class="fas fa-search"></i>
+                <input type="text" placeholder="ค้นหาสินค้า..." id="searchInput">
+            </div>
+        </div>
+    </div>
+
+    <!-- Product Table -->
+    <div class="table-container">
+        <div class="table-wrapper">
+            <table class="modern-table" id="productTable">
+                <thead>
+                    <tr>
+                        <th>
+                            <input type="checkbox" id="selectAll">
+                        </th>
+                        <th>
+                            <i class="fas fa-hashtag"></i>
+                            ID
+                        </th>
+                        <th>
+                            <i class="fas fa-tag"></i>
+                            Name
+                        </th>
+                        <th>
+                            <i class="fas fa-barcode"></i>
+                            SKU
+                        </th>
+                        <th>
+                            <i class="fas fa-dollar-sign"></i>
+                            Price
+                        </th>
+                        <th>
+                            <i class="fas fa-cubes"></i>
+                            Quantity
+                        </th>
+                        <th>
+                            <i class="fas fa-chart-bar"></i>
+                            Status
+                        </th>
+                        <th>
+                            <i class="fas fa-cogs"></i>
+                            Actions
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for product in products %}
+                    <tr class="table-row" data-product-id="{{ product.id }}">
+                        <td>
+                            <input type="checkbox" class="row-select">
+                        </td>
+                        <td>
+                            <span class="product-id">#{{ product.id }}</span>
+                        </td>
+                        <td>
+                            <div class="product-info">
+                                <div class="product-avatar">
+                                    <i class="fas fa-box"></i>
+                                </div>
+                                <div class="product-details">
+                                    <span class="product-name">{{ product.name }}</span>
+                                    <span class="product-category">Electronics</span>
+                                </div>
+                            </div>
+                        </td>
+                        <td>
+                            <code class="sku-code">{{ product.sku }}</code>
+                        </td>
+                        <td>
+                            <span class="price">฿{{ product.price|floatformat:2 }}</span>
+                        </td>
+                        <td>
+                            <div class="quantity-info">
+                                <span class="qty-number">{{ product.quantity }}</span>
+                                <span class="qty-unit">units</span>
+                            </div>
+                        </td>
+                        <td>
+                            {% if product.quantity > 10 %}
+                                <span class="status in-stock">
+                                    <i class="fas fa-check-circle"></i>
+                                    In Stock
+                                </span>
+                            {% elif product.quantity > 5 %}
+                                <span class="status low-stock">
+                                    <i class="fas fa-exclamation-triangle"></i>
+                                    Low Stock
+                                </span>
+                            {% else %}
+                                <span class="status out-of-stock">
+                                    <i class="fas fa-times-circle"></i>
+                                    Critical
+                                </span>
+                            {% endif %}
+                        </td>
+                        <td>
+                            <div class="action-buttons">
+                                <button class="action-btn view" title="View Details">
+                                    <i class="fas fa-eye"></i>
+                                </button>
+                                <button class="action-btn edit" title="Edit Product">
+                                    <i class="fas fa-edit"></i>
+                                </button>
+                                <button class="action-btn delete" title="Delete Product">
+                                    <i class="fas fa-trash"></i>
+                                </button>
+                                <button class="action-btn more" title="More Options">
+                                    <i class="fas fa-ellipsis-v"></i>
+                                </button>
+                            </div>
+                        </td>
+                    </tr>
+                    {% empty %}
+                    <tr>
+                        <td colspan="8" class="empty-state">
+                            <div class="empty-content">
+                                <i class="fas fa-box-open"></i>
+                                <h3>ไม่มีสินค้าในระบบ</h3>
+                                <p>เริ่มต้นด้วยการเพิ่มสินค้าใหม่เข้าสู่ระบบของคุณ</p>
+                                <button class="btn btn-primary">
+                                    <i class="fas fa-plus"></i>
+                                    เพิ่มสินค้าแรก
+                                </button>
+                            </div>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <!-- Pagination -->
+    <div class="pagination-section">
+        <div class="pagination-info">
+            <span>Showing 1-{{ products|length }} of {{ products|length }} products</span>
+        </div>
+        <div class="pagination-controls">
+            <button class="page-btn" disabled>
+                <i class="fas fa-chevron-left"></i>
+                Previous
+            </button>
+            <button class="page-btn active">1</button>
+            <button class="page-btn">2</button>
+            <button class="page-btn">3</button>
+            <button class="page-btn">
+                Next
+                <i class="fas fa-chevron-right"></i>
+            </button>
+        </div>
+    </div>
+
+    <!-- Bulk Actions Panel -->
+    <div class="bulk-actions" id="bulkActions" style="display: none;">
+        <div class="bulk-content">
+            <span class="bulk-text">
+                <span id="selectedCount">0</span> items selected
+            </span>
+            <div class="bulk-buttons">
+                <button class="bulk-btn delete">
+                    <i class="fas fa-trash"></i>
+                    Delete
+                </button>
+                <button class="bulk-btn export">
+                    <i class="fas fa-download"></i>
+                    Export
+                </button>
+                <button class="bulk-btn edit">
+                    <i class="fas fa-edit"></i>
+                    Bulk Edit
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Quick Actions -->
+    <div class="quick-actions">
+        <h3>Quick Actions</h3>
+        <div class="quick-grid">
+            <a href="#" class="quick-card">
+                <i class="fas fa-plus-circle"></i>
+                <span>Add Product</span>
+            </a>
+            <a href="#" class="quick-card">
+                <i class="fas fa-file-import"></i>
+                <span>Import CSV</span>
+            </a>
+            <a href="#" class="quick-card">
+                <i class="fas fa-chart-pie"></i>
+                <span>Analytics</span>
+            </a>
+            <a href="#" class="quick-card">
+                <i class="fas fa-cog"></i>
+                <span>Settings</span>
+            </a>
+        </div>
+    </div>
+</div>
+
+<style>
+.product-container {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+/* Hero Section */
+.product-hero {
+    background: linear-gradient(135deg, #3498db 0%, #2980b9 100%);
+    color: white;
+    padding: 60px 40px;
+    border-radius: 15px;
+    margin-bottom: 40px;
+    text-align: center;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+}
+
+.hero-title {
+    font-size: 2.8rem;
+    margin-bottom: 15px;
+    font-weight: 700;
+}
+
+.hero-title i {
+    margin-right: 15px;
+    color: #ffd700;
+}
+
+.hero-subtitle {
+    font-size: 1.2rem;
+    opacity: 0.9;
+    max-width: 600px;
+    margin: 0 auto;
+    line-height: 1.6;
+}
+
+/* Stats Section */
+.stats-section {
+    margin-bottom: 40px;
+}
+
+.stats-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 25px;
+}
+
+.stat-card {
+    background: white;
+    padding: 30px;
+    border-radius: 12px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.08);
+    border: 1px solid #f0f0f0;
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.stat-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 10px 25px rgba(0,0,0,0.12);
+}
+
+.stat-icon {
+    width: 60px;
+    height: 60px;
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.5rem;
+    color: white;
+}
+
+.stat-card:nth-child(1) .stat-icon { background: linear-gradient(135deg, #3498db, #2980b9); }
+.stat-card:nth-child(2) .stat-icon { background: linear-gradient(135deg, #2ecc71, #27ae60); }
+.stat-card:nth-child(3) .stat-icon { background: linear-gradient(135deg, #f39c12, #e67e22); }
+.stat-card:nth-child(4) .stat-icon { background: linear-gradient(135deg, #e74c3c, #c0392b); }
+
+.stat-info h3 {
+    font-size: 2rem;
+    font-weight: 700;
+    color: #333;
+    margin: 0 0 5px 0;
+}
+
+.stat-info p {
+    font-size: 0.9rem;
+    color: #666;
+    margin: 0;
+}
+
+/* Control Panel */
+.control-panel {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 30px;
+    background: white;
+    padding: 30px;
+    border-radius: 12px;
+    box-shadow: 0 3px 10px rgba(0,0,0,0.05);
+    border: 1px solid #f0f0f0;
+}
+
+.control-left h2 {
+    font-size: 1.8rem;
+    color: #333;
+    margin: 0 0 5px 0;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.control-left h2 i {
+    color: #3498db;
+}
+
+.control-description {
+    color: #666;
+    margin: 0;
+    font-size: 0.95rem;
+}
+
+.control-right {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.btn {
+    padding: 12px 24px;
+    border: none;
+    border-radius: 8px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 0.9rem;
+    text-decoration: none;
+}
+
+.btn-primary {
+    background: linear-gradient(135deg, #3498db, #2980b9);
+    color: white;
+}
+
+.btn-secondary {
+    background: white;
+    color: #3498db;
+    border: 2px solid #3498db;
+}
+
+.btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+}
+
+.search-box {
+    position: relative;
+    display: flex;
+    align-items: center;
+}
+
+.search-box i {
+    position: absolute;
+    left: 15px;
+    color: #666;
+    font-size: 0.9rem;
+}
+
+.search-box input {
+    padding: 12px 15px 12px 40px;
+    border: 2px solid #e9ecef;
+    border-radius: 8px;
+    font-size: 0.9rem;
+    width: 250px;
+    transition: border-color 0.3s ease;
+}
+
+.search-box input:focus {
+    outline: none;
+    border-color: #3498db;
+}
+
+/* Table Container */
+.table-container {
+    background: white;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.08);
+    border: 1px solid #f0f0f0;
+    margin-bottom: 30px;
+}
+
+.table-wrapper {
+    overflow-x: auto;
+}
+
+.modern-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.9rem;
+}
+
+.modern-table thead {
+    background: #f8f9fa;
+}
+
+.modern-table th {
+    padding: 20px 15px;
+    text-align: left;
+    font-weight: 600;
+    color: #333;
+    border-bottom: 2px solid #e9ecef;
+    white-space: nowrap;
+}
+
+.modern-table th i {
+    margin-right: 8px;
+    color: #666;
+    font-size: 0.8rem;
+}
+
+.modern-table td {
+    padding: 20px 15px;
+    border-bottom: 1px solid #f0f0f0;
+    vertical-align: middle;
+}
+
+.table-row:hover {
+    background: #f8f9fa;
+}
+
+/* Product Info */
+.product-info {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.product-avatar {
+    width: 40px;
+    height: 40px;
+    background: linear-gradient(135deg, #3498db, #2980b9);
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-size: 1rem;
+}
+
+.product-details {
+    display: flex;
+    flex-direction: column;
+}
+
+.product-name {
+    font-weight: 600;
+    color: #333;
+    font-size: 0.95rem;
+}
+
+.product-category {
+    font-size: 0.8rem;
+    color: #666;
+}
+
+.product-id {
+    font-weight: 600;
+    color: #3498db;
+    font-size: 0.9rem;
+}
+
+.sku-code {
+    background: #f8f9fa;
+    padding: 4px 8px;
+    border-radius: 4px;
+    font-family: 'Courier New', monospace;
+    font-size: 0.8rem;
+    color: #666;
+}
+
+.price {
+    font-weight: 600;
+    color: #2ecc71;
+    font-size: 1rem;
+}
+
+.quantity-info {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.qty-number {
+    font-weight: 600;
+    color: #333;
+    font-size: 1.1rem;
+}
+
+.qty-unit {
+    font-size: 0.7rem;
+    color: #666;
+    text-transform: uppercase;
+}
+
+/* Status Badges */
+.status {
+    padding: 6px 12px;
+    border-radius: 20px;
+    font-size: 0.8rem;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    white-space: nowrap;
+}
+
+.status.in-stock {
+    background: rgba(46, 204, 113, 0.1);
+    color: #27ae60;
+}
+
+.status.low-stock {
+    background: rgba(243, 156, 18, 0.1);
+    color: #e67e22;
+}
+
+.status.out-of-stock {
+    background: rgba(231, 76, 60, 0.1);
+    color: #c0392b;
+}
+
+.status i {
+    font-size: 0.7rem;
+}
+
+/* Action Buttons */
+.action-buttons {
+    display: flex;
+    gap: 5px;
+}
+
+.action-btn {
+    width: 32px;
+    height: 32px;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s ease;
+    font-size: 0.8rem;
+}
+
+.action-btn.view {
+    background: rgba(52, 152, 219, 0.1);
+    color: #3498db;
+}
+
+.action-btn.edit {
+    background: rgba(46, 204, 113, 0.1);
+    color: #27ae60;
+}
+
+.action-btn.delete {
+    background: rgba(231, 76, 60, 0.1);
+    color: #c0392b;
+}
+
+.action-btn.more {
+    background: rgba(149, 165, 166, 0.1);
+    color: #7f8c8d;
+}
+
+.action-btn:hover {
+    transform: scale(1.1);
+    box-shadow: 0 3px 10px rgba(0,0,0,0.2);
+}
+
+/* Empty State */
+.empty-state {
+    text-align: center;
+    padding: 80px 40px;
+}
+
+.empty-content i {
+    font-size: 4rem;
+    color: #bdc3c7;
+    margin-bottom: 20px;
+}
+
+.empty-content h3 {
+    font-size: 1.5rem;
+    color: #333;
+    margin-bottom: 10px;
+}
+
+.empty-content p {
+    color: #666;
+    margin-bottom: 30px;
+}
+
+/* Pagination */
+.pagination-section {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: white;
+    padding: 20px 30px;
+    border-radius: 12px;
+    box-shadow: 0 3px 10px rgba(0,0,0,0.05);
+    border: 1px solid #f0f0f0;
+    margin-bottom: 30px;
+}
+
+.pagination-info {
+    color: #666;
+    font-size: 0.9rem;
+}
+
+.pagination-controls {
+    display: flex;
+    gap: 5px;
+}
+
+.page-btn {
+    padding: 8px 16px;
+    border: 1px solid #e9ecef;
+    background: white;
+    color: #666;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    font-size: 0.9rem;
+}
+
+.page-btn:hover:not(:disabled) {
+    background: #f8f9fa;
+    border-color: #3498db;
+    color: #3498db;
+}
+
+.page-btn.active {
+    background: #3498db;
+    color: white;
+    border-color: #3498db;
+}
+
+.page-btn:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+/* Bulk Actions */
+.bulk-actions {
+    position: fixed;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: #2c3e50;
+    color: white;
+    padding: 15px 30px;
+    border-radius: 50px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+    z-index: 1000;
+}
+
+.bulk-content {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+.bulk-text {
+    font-weight: 600;
+}
+
+.bulk-buttons {
+    display: flex;
+    gap: 10px;
+}
+
+.bulk-btn {
+    padding: 8px 16px;
+    border: none;
+    border-radius: 20px;
+    cursor: pointer;
+    font-size: 0.8rem;
+    font-weight: 600;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.bulk-btn.delete {
+    background: #e74c3c;
+    color: white;
+}
+
+.bulk-btn.export {
+    background: #3498db;
+    color: white;
+}
+
+.bulk-btn.edit {
+    background: #f39c12;
+    color: white;
+}
+
+.bulk-btn:hover {
+    transform: scale(1.05);
+}
+
+/* Quick Actions */
+.quick-actions {
+    background: white;
+    padding: 30px;
+    border-radius: 12px;
+    box-shadow: 0 3px 10px rgba(0,0,0,0.05);
+    border: 1px solid #f0f0f0;
+}
+
+.quick-actions h3 {
+    font-size: 1.3rem;
+    color: #333;
+    margin-bottom: 20px;
+    font-weight: 600;
+}
+
+.quick-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 15px;
+}
+
+.quick-card {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 20px;
+    background: #f8f9fa;
+    border-radius: 8px;
+    text-decoration: none;
+    color: #333;
+    transition: all 0.3s ease;
+    border: 1px solid transparent;
+}
+
+.quick-card:hover {
+    background: white;
+    border-color: #3498db;
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+    color: #3498db;
+}
+
+.quick-card i {
+    font-size: 1.2rem;
+    color: #3498db;
+}
+
+.quick-card span {
+    font-weight: 600;
+}
+
+/* Responsive Design */
+@media (max-width: 1200px) {
+    .control-panel {
+        flex-direction: column;
+        gap: 20px;
+        align-items: flex-start;
+    }
+    
+    .control-right {
+        width: 100%;
+        justify-content: space-between;
+        flex-wrap: wrap;
+    }
+}
+
+@media (max-width: 768px) {
+    .product-container {
+        padding: 15px;
+    }
+    
+    .hero-title {
+        font-size: 2rem;
+    }
+    
+    .hero-subtitle {
+        font-size: 1rem;
+    }
+    
+    .stats-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+    
+    .control-right {
+        flex-direction: column;
+        gap: 10px;
+        align-items: stretch;
+    }
+    
+    .search-box input {
+        width: 100%;
+    }
+    
+    .pagination-section {
+        flex-direction: column;
+        gap: 15px;
+    }
+    
+    .pagination-controls {
+        justify-content: center;
+    }
+    
+    .quick-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+    
+    .bulk-actions {
+        left: 20px;
+        right: 20px;
+        transform: none;
+        border-radius: 12px;
+    }
+    
+    .bulk-content {
+        flex-direction: column;
+        gap: 15px;
+    }
+    
+    .modern-table {
+        font-size: 0.8rem;
+    }
+    
+    .modern-table th,
+    .modern-table td {
+        padding: 12px 8px;
+    }
+}
+
+@media (max-width: 480px) {
+    .stats-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .quick-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .action-buttons {
+        flex-direction: column;
+    }
+}
+</style>
+
+<!-- Add Font Awesome for icons -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    // Search functionality
+    const searchInput = document.getElementById('searchInput');
+    const productTable = document.getElementById('productTable');
+    const rows = productTable.getElementsByClassName('table-row');
+    
+    searchInput.addEventListener('input', function() {
+        const searchTerm = this.value.toLowerCase();
+        
+        Array.from(rows).forEach(row => {
+            const productName = row.querySelector('.product-name');
+            const sku = row.querySelector('.sku-code');
+            
+            if (productName && sku) {
+                const nameText = productName.textContent.toLowerCase();
+                const skuText = sku.textContent.toLowerCase();
+                
+                if (nameText.includes(searchTerm) || skuText.includes(searchTerm)) {
+                    row.style.display = '';
+                } else {
+                    row.style.display = 'none';
+                }
+            }
+        });
+    });
+    
+    // Select all functionality
+    const selectAll = document.getElementById('selectAll');
+    const rowSelects = document.getElementsByClassName('row-select');
+    const bulkActions = document.getElementById('bulkActions');
+    const selectedCount = document.getElementById('selectedCount');
+    
+    selectAll.addEventListener('change', function() {
+        Array.from(rowSelects).forEach(checkbox => {
+            checkbox.checked = this.checked;
+        });
+        updateBulkActions();
+    });
+    
+    Array.from(rowSelects).forEach(checkbox => {
+        checkbox.addEventListener('change', updateBulkActions);
+    });
+    
+    function updateBulkActions() {
+        const checkedBoxes = Array.from(rowSelects).filter(cb => cb.checked);
+        const count = checkedBoxes.length;
+        
+        if (count > 0) {
+            bulkActions.style.display = 'block';
+            selectedCount.textContent = count;
+        } else {
+            bulkActions.style.display = 'none';
+        }
+        
+        // Update select all checkbox
+        selectAll.indeterminate = count > 0 && count < rowSelects.length;
+        selectAll.checked = count === rowSelects.length && count > 0;
+    }
+    
+    // Action button handlers
+    document.addEventListener('click', function(e) {
+        if (e.target.closest('.action-btn.view')) {
+            const row = e.target.closest('.table-row');
+            const productId = row.dataset.productId;
+            alert(`View details for product ID: ${productId}`);
+        }
+        
+        if (e.target.closest('.action-btn.edit')) {
+            const row = e.target.closest('.table-row');
+            const productId = row.dataset.productId;
+            alert(`Edit product ID: ${productId}`);
+        }
+        
+        if (e.target.closest('.action-btn.delete')) {
+            const row = e.target.closest('.table-row');
+            const productId = row.dataset.productId;
+            if (confirm('Are you sure you want to delete this product?')) {
+                alert(`Delete product ID: ${productId}`);
+            }
+        }
+    });
+    
+    // Bulk action handlers
+    document.addEventListener('click', function(e) {
+        if (e.target.closest('.bulk-btn.delete')) {
+            const checkedBoxes = Array.from(rowSelects).filter(cb => cb.checked);
+            if (confirm(`Are you sure you want to delete ${checkedBoxes.length} products?`)) {
+                alert(`Deleting ${checkedBoxes.length} products`);
+            }
+        }
+        
+        if (e.target.closest('.bulk-btn.export')) {
+            const checkedBoxes = Array.from(rowSelects).filter(cb => cb.checked);
+            alert(`Exporting ${checkedBoxes.length} products`);
+        }
+        
+        if (e.target.closest('.bulk-btn.edit')) {
+            const checkedBoxes = Array.from(rowSelects).filter(cb => cb.checked);
+            alert(`Bulk editing ${checkedBoxes.length} products`);
+        }
+    });
+    
+    // Table row hover effects
+    Array.from(rows).forEach(row => {
+        row.addEventListener('mouseenter', function() {
+            this.style.background = '#f8f9fa';
+        });
+        
+        row.addEventListener('mouseleave', function() {
+            this.style.background = '';
+        });
+    });
+    
+    // Add smooth scrolling for bulk actions
+    if (bulkActions) {
+        bulkActions.style.transition = 'all 0.3s ease';
+    }
+});
+</script>
+{% endblock %}

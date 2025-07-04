@@ -1,0 +1,306 @@
+/* Custom Admin CSS */
+
+/* เปลี่ยนสีหัวเรื่องหลัก */
+#header {
+  background: linear-gradient(
+    135deg,
+    #8b5cf6 0%,
+    #a855f7 50%,
+    #c084fc 100%
+  ) !important;
+  color: white !important;
+  box-shadow: 0 2px 10px rgba(139, 92, 246, 0.3) !important;
+}
+
+/* เปลี่ยนสีลิงก์ใน header */
+#header a,
+#header a:visited {
+  color: #fff !important;
+}
+
+#header a:hover {
+  color: #e0e0e0 !important;
+}
+
+/* สไตล์สำหรับ breadcrumbs */
+.breadcrumbs {
+  background: #f8f9fa !important;
+  border-bottom: 1px solid #dee2e6 !important;
+}
+
+.breadcrumbs a {
+  color: #495057 !important;
+}
+
+/* เปลี่ยนสีปุ่ม */
+.button,
+input[type="submit"],
+input[type="button"],
+.submit-row input,
+a.button {
+  background: linear-gradient(135deg, #8b5cf6 0%, #a855f7 100%) !important;
+  border: none !important;
+  border-radius: 6px !important;
+  padding: 10px 20px !important;
+  font-weight: 500 !important;
+  transition: all 0.3s ease !important;
+  color: white !important;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.2) !important;
+}
+
+.button:hover,
+input[type="submit"]:hover,
+input[type="button"]:hover,
+.submit-row input:hover,
+a.button:hover {
+  background: linear-gradient(135deg, #7c3aed 0%, #9333ea 100%) !important;
+  transform: translateY(-1px) !important;
+  box-shadow: 0 4px 8px rgba(139, 92, 246, 0.4) !important;
+}
+
+/* สไตล์สำหรับตาราง */
+.results {
+  border-radius: 8px !important;
+  overflow: hidden !important;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1) !important;
+}
+
+.results th {
+  background: #f8f9fa !important;
+  border-bottom: 2px solid #dee2e6 !important;
+  font-weight: 600 !important;
+  color: #495057 !important;
+}
+
+.results tr:hover {
+  background-color: #f8f9fa !important;
+}
+
+/* สไตล์สำหรับ module */
+.module {
+  border-radius: 8px !important;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1) !important;
+  margin-bottom: 20px !important;
+}
+
+/* สไตล์สำหรับ module headers ทั้งหมด */
+.module h2,
+.module caption,
+.module .section h2,
+#content-main .module h2,
+.dashboard .module h2 {
+  background: linear-gradient(
+    135deg,
+    #8b5cf6 0%,
+    #a855f7 50%,
+    #c084fc 100%
+  ) !important;
+  color: white !important;
+  border-radius: 8px 8px 0 0 !important;
+  padding: 15px 20px !important;
+  margin: 0 !important;
+  font-weight: 500 !important;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.2) !important;
+}
+
+/* เฉพาะเจาะจงสำหรับ Admin index modules */
+#content-main .app-stock .module h2,
+#content-main .app-auth .module h2,
+.app-list .module h2 {
+  background: linear-gradient(
+    135deg,
+    #8b5cf6 0%,
+    #a855f7 50%,
+    #c084fc 100%
+  ) !important;
+  color: white !important;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.2) !important;
+}
+
+/* สไตล์สำหรับฟอร์ม */
+.form-row {
+  border-radius: 6px !important;
+  margin-bottom: 15px !important;
+}
+
+.form-row:hover {
+  background-color: #f8f9fa !important;
+  transition: background-color 0.3s ease !important;
+}
+
+/* สไตล์สำหรับ input fields */
+input[type="text"],
+input[type="password"],
+input[type="email"],
+input[type="url"],
+input[type="number"],
+textarea,
+select {
+  border: 2px solid #e9ecef !important;
+  border-radius: 6px !important;
+  padding: 8px 12px !important;
+  transition: border-color 0.3s ease !important;
+}
+
+input[type="text"]:focus,
+input[type="password"]:focus,
+input[type="email"]:focus,
+input[type="url"]:focus,
+input[type="number"]:focus,
+textarea:focus,
+select:focus {
+  border-color: #8b5cf6 !important;
+  box-shadow: 0 0 0 3px rgba(139, 92, 246, 0.1) !important;
+  outline: none !important;
+}
+
+/* สไตล์สำหรับ sidebar */
+#navigation-sidebar {
+  background: #f8f9fa !important;
+  border-right: 1px solid #dee2e6 !important;
+}
+
+#navigation-sidebar a {
+  color: #495057 !important;
+  text-decoration: none !important;
+  padding: 10px 15px !important;
+  display: block !important;
+  border-radius: 6px !important;
+  margin: 2px 10px !important;
+  transition: all 0.3s ease !important;
+}
+
+#navigation-sidebar a:hover {
+  background: linear-gradient(135deg, #8b5cf6 0%, #a855f7 100%) !important;
+  color: white !important;
+}
+
+/* เปลี่ยนสีไอคอน */
+.icon {
+  filter: hue-rotate(240deg) !important;
+}
+
+/* Custom styles for pagination */
+.paginator {
+  background: #f8f9fa !important;
+  border: 1px solid #dee2e6 !important;
+  border-radius: 6px !important;
+  padding: 10px !important;
+}
+
+.paginator a {
+  color: #667eea !important;
+  text-decoration: none !important;
+  padding: 5px 10px !important;
+  border-radius: 4px !important;
+  margin: 0 2px !important;
+}
+
+.paginator a:hover {
+  background: #667eea !important;
+  color: white !important;
+}
+
+/* สไตล์สำหรับข้อความแสดงผลลัพธ์ */
+.results th a {
+  color: #495057 !important;
+  text-decoration: none !important;
+}
+
+.results th a:hover {
+  color: #667eea !important;
+}
+
+/* สีสำหรับข้อความสำเร็จ */
+.success {
+  background: #d4edda !important;
+  border: 1px solid #c3e6cb !important;
+  color: #155724 !important;
+  border-radius: 6px !important;
+}
+
+/* สีสำหรับข้อความผิดพลาด */
+.error {
+  background: #f8d7da !important;
+  border: 1px solid #f5c6cb !important;
+  color: #721c24 !important;
+  border-radius: 6px !important;
+}
+
+/* สีสำหรับข้อความเตือน */
+.warning {
+  background: #fff3cd !important;
+  border: 1px solid #ffeaa7 !important;
+  color: #856404 !important;
+  border-radius: 6px !important;
+}
+
+/* Dashboard และ Recent Actions สไตล์พิเศษ */
+.dashboard .module h2,
+#recent-actions-module h2,
+.module:has(.recent_actions) h2,
+body.dashboard #content-main .module h2,
+body.app-index #content-main .module h2 {
+  background: linear-gradient(
+    135deg,
+    #8b5cf6 0%,
+    #a855f7 50%,
+    #c084fc 100%
+  ) !important;
+  color: white !important;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3) !important;
+  border-radius: 8px 8px 0 0 !important;
+  padding: 15px 20px !important;
+  margin: 0 !important;
+  font-weight: 600 !important;
+}
+
+/* Force override สำหรับ Admin index */
+body.dashboard #container #content-main .module h2,
+body.app-index #container #content-main .module h2 {
+  background: linear-gradient(
+    135deg,
+    #8b5cf6 0%,
+    #a855f7 50%,
+    #c084fc 100%
+  ) !important;
+  color: white !important;
+}
+
+/* สำหรับ Recent Actions List */
+.recent_actions li {
+  padding: 8px 0 !important;
+  border-bottom: 1px solid #f0f0f0 !important;
+}
+
+.recent_actions li:last-child {
+  border-bottom: none !important;
+}
+
+.recent_actions li:hover {
+  background-color: #f8f9ff !important;
+  border-radius: 4px !important;
+  padding-left: 8px !important;
+  transition: all 0.3s ease !important;
+}
+
+/* Additional CSS เพื่อ Force Override ทุก module headers */
+html body.dashboard #content h2,
+html body.dashboard #content .module h2,
+html body.app-index #content h2,
+html body.app-index #content .module h2,
+html body #content-main .module h2,
+html body .module h2 {
+  background: linear-gradient(
+    135deg,
+    #8b5cf6 0%,
+    #a855f7 50%,
+    #c084fc 100%
+  ) !important;
+  color: white !important;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3) !important;
+  border-radius: 8px 8px 0 0 !important;
+  padding: 15px 20px !important;
+  margin: 0 !important;
+  font-weight: 600 !important;
+}
