@@ -4,3 +4,4 @@ gunicorn
 packaging
 psycopg2-binary
 sqlparse
+whitenoise
