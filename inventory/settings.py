@@ -28,9 +28,13 @@ BASE_DIR = os.path.dirname(
 SECRET_KEY = 'django-insecure-dn*n@6*f8ufx)i66i#gx6*lx7%lh1=g#)3w=sba!g4pg$01uh^'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = [
+    'basicdjangoopec.onrender.com',
+    'localhost', '127.0.0.1',
+    'ep-mute-scene-a1g60o04-pooler.ap-southeast-1.aws.neon.tech'
+]
 
 
 # Application definition
